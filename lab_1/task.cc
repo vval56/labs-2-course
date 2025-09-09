@@ -1,38 +1,31 @@
 #include "task.h"
 
+using namespace std;
+
 void find_intersection(Array* array1, Array* array2) {
     if (!array1 || !array2 || array1->Size() == 0 || array2->Size() == 0) {
         cout << "Массивы не инициализированы или пусты!" << endl;
         return;
     }
 
-    int* data1 = const_cast<int*>(array1->GetData());
-    int* data2 = const_cast<int*>(array2->GetData());
-    int size1 = array1->Size();
-    int size2 = array2->Size();
-    
-    sort(data1, data1 + size1);
-    sort(data2, data2 + size2);
-    
-    vector<int> intersection;
-    int i = 0, j = 0;
-    
-    while (i < size1 && j < size2) {
-        if (data1[i] < data2[j]) {
-            i++;
-        } else if (data1[i] > data2[j]) {
-            j++;
-        } else {
-            if (intersection.empty() || intersection.back() != data1[i]) {
-                intersection.push_back(data1[i]);
-            }
-            i++;
-            j++;
+    vector<int> union_set;
+
+    for (int i = 0; i < array1->Size(); i++) {
+        int current = array1->Get(i);
+        if (find(union_set.begin(), union_set.end(), current) == union_set.end()) {
+            union_set.push_back(current);
         }
     }
     
-    cout << "Пересечение массивов (" << intersection.size() << " элементов): ";
-    for (int num : intersection) {
+    for (int i = 0; i < array2->Size(); i++) {
+        int current = array2->Get(i);
+        if (find(union_set.begin(), union_set.end(), current) == union_set.end()) {
+            union_set.push_back(current);
+        }
+    }
+    
+    cout << "Объединение массивов (" << union_set.size() << " элементов): ";
+    for (int num : union_set) {
         cout << num << " ";
     }
     cout << endl;

@@ -3,20 +3,26 @@
 
 #include <iostream>
 
-using namespace std;
-
 class Array {
     public:
         explicit Array(int size);
        
 
-        Array(int size, int* values);   
+        Array(int size, const int* values);   
 
         Array(int size, bool is_random);
 
         virtual ~Array();
 
-        int Size();
+        Array(const Array& other);
+
+        Array& operator=(const Array& other);
+
+        Array(Array&& other) noexcept;
+
+        Array& operator=(Array&& other) noexcept;
+
+        const int Size();
         
         int Get(int index) const;
         

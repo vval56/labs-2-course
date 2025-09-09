@@ -1,5 +1,7 @@
 #include "input_array.h"
 
+using namespace std;
+
 #include <vector>
 #include <limits>
 
@@ -65,13 +67,12 @@ void hand_input(Array*& array1, Array*& array2) {
 }
 
 void random_input(Array*& array1, Array*& array2) {
-    int size1 = 0, size2 = 0;
     cout << "Введите размер первого массива" << endl;
-    size1 = check_int();
+    int size1 = check_int();
     array1 = new Array(size1, true);
 
     cout << "Введите размер первого массива" << endl;
-    size2 = check_int();
+    int size2 = check_int();
     array2 = new Array(size2, true);
 }
 
@@ -88,7 +89,7 @@ void show_arrays(Array*& array1, Array*& array2) {
 }
 
 void press_enter_to_continue() {
-    printf("\nНажмите Enter для продолжения...");
+    cout << endl << "Нажмите Enter для продолжения...";
     getchar();
 }
 
@@ -101,7 +102,7 @@ void show_menu(){
          << "0 - Выход" << endl;
 }
 
-void input(Array*& array1, Array*& array2) {
+[[noreturn]] void input(Array*& array1, Array*& array2) {
     int choice = -1;
 
     while(true) {

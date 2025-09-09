@@ -1,9 +1,8 @@
+#include "task.h"
+
 #ifndef INPUT_H
 #define INPUT_H
 
-using namespace std;
-
-#include "task.h"
 #include <cctype>
 #include <sstream>
 #include <limits> 
