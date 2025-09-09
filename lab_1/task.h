@@ -5,6 +5,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <ranges>
 
 void find_intersection(Array* array1, Array* array2);
 void find_union(Array* array1, Array* array2);

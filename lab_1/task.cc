@@ -1,3 +1,4 @@
+#include <unordered_set>
 #include "task.h"
 
 using namespace std;
@@ -8,27 +9,43 @@ void find_intersection(Array* array1, Array* array2) {
         return;
     }
 
-    vector<int> union_set;
+    vector<int> arr1; vector<int> arr2; vector<int> intersection;
 
-    for (int i = 0; i < array1->Size(); i++) {
-        int current = array1->Get(i);
-        if (find(union_set.begin(), union_set.end(), current) == union_set.end()) {
-            union_set.push_back(current);
+    for(int i = 0; i < array1->Size(); i++){
+        arr1.push_back(array1->Get(i));
+    }
+
+    for(int i = 0; i < array2->Size(); i++){
+        arr2.push_back(array2->Get(i));
+    }
+
+    sort(arr1.begin(), arr1.end());
+    sort(arr2.begin(), arr2.end());
+
+    int i = 0 , j = 0;
+
+    while (i < arr1.size() && j < arr2.size()) {
+        if (arr1[i] < arr2[j]) {
+            i++;
+        } else if (arr1[i] > arr2[j]) {
+            j++;
+        } else {
+            if (intersection.empty() || intersection.back() != intersection[i]) {
+                intersection.push_back(arr1[i]);
+            }
+            i++;
+            j++;
         }
     }
-    
-    for (int i = 0; i < array2->Size(); i++) {
-        int current = array2->Get(i);
-        if (find(union_set.begin(), union_set.end(), current) == union_set.end()) {
-            union_set.push_back(current);
-        }
+
+    cout << "Пересечение составялет " << intersection.size() << "элементов." << endl;
+    if(!intersection.empty()){
+        cout << "{";
+        for (int num : intersection)
+            cout << num << " ";
+        
+        cout << "}" << endl;
     }
-    
-    cout << "Объединение массивов (" << union_set.size() << " элементов): ";
-    for (int num : union_set) {
-        cout << num << " ";
-    }
-    cout << endl;
 }
 
 void find_union(Array* array1, Array* array2) {
@@ -37,49 +54,29 @@ void find_union(Array* array1, Array* array2) {
         return;
     }
 
-    int size1 = array1->Size();
-    int size2 = array2->Size();
+    vector<int> arr1; vector<int> arr2; vector<int> intersection;
 
-    int* result = new int[size1 + size2];
-    int result_size = 0;
+    for(int i = 0; i < array1->Size(); i++){
+        arr1.push_back(array1->Get(i));
+    }
+
+    for(int i = 0; i < array2->Size(); i++){
+        arr2.push_back(array2->Get(i));
+    }
+
+    unordered_set<int> union_set;
     
-    for (int i = 0; i < size1; i++) {
-        int current = array1->Get(i);
-        bool already_exists = false;
-        
-        for (int j = 0; j < result_size; j++) {
-            if (result[j] == current) {
-                already_exists = true;
-                break;
-            }
-        }
-        
-        if (!already_exists) {
-            result[result_size++] = current;
-        }
+    for (int num : arr1) {
+        union_set.insert(num);
     }
     
-    for (int i = 0; i < size2; i++) {
-        int current = array2->Get(i);
-        bool already_exists = false;
-        
-        for (int j = 0; j < result_size; j++) {
-            if (result[j] == current) {
-                already_exists = true;
-                break;
-            }
-        }
-        
-        if (!already_exists) {
-            result[result_size++] = current;
-        }
+    for (int num : arr2) {
+        union_set.insert(num);
     }
     
-    cout << "Объединение массивов (" << result_size << " элементов): ";
-    for (int i = 0; i < result_size; i++) {
-        cout << result[i] << " ";
+    cout << "Объединение (" << union_set.size() << " элементов): ";
+    for (int num : union_set) {
+        cout << num << " ";
     }
     cout << endl;
-    
-    delete[] result;
 }

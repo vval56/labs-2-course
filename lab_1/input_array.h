@@ -7,6 +7,6 @@
 #include <sstream>
 #include <limits> 
 
-void input(Array*& array1, Array*& array2);
+[[noreturn]] void input(Array*& array1, Array*& array2);
 
 #endif

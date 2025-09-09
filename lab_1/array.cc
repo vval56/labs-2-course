@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Array::Array(int size) : size_(size), data(new int[size]){}
+Array::Array(int size) : data(new int[size]), size_(size){}
 
 Array::Array(int size, const int* values): size_(size){   
     data = new int[size_];
@@ -15,10 +15,10 @@ Array::Array(int size, const int* values): size_(size){
 Array::Array(int size, bool is_random) : size_(size) {
     data = new int[size_];
 
-    if(is_random == true) {
+    if(is_random) {
         static random_device rd;
         static mt19937 gen(rd());
-        uniform_int_distribution<int> dist(0, 100);
+        uniform_int_distribution dist(0, 100);
 
         for(int i = 0; i < size_; i++) {
             data[i] = dist(gen);
@@ -26,7 +26,7 @@ Array::Array(int size, bool is_random) : size_(size) {
     }
 }
 
-Array::Array(const Array& other) : size_(other.size_), data(new int[other.size_]) {
+Array::Array(const Array& other) : data(new int[other.size_]), size_(other.size_) {
     for(int i = 0; i < size_; i++) {
         data[i] = other.data[i];
     }
@@ -58,8 +58,7 @@ Array& Array::operator=(Array&& other) noexcept {
     return *this;
 }
 
-Array::Array(Array&& other) noexcept 
-    : size_(other.size_), data(other.data) {
+Array::Array(Array&& other) noexcept : data(other.data), size_(other.size_) {
     other.size_ = 0;
     other.data = nullptr;
 }
@@ -68,7 +67,7 @@ Array::~Array() {
     delete[] data;
 }
 
-const int Array::Size()  {
+int Array::Size() const {
     return size_;
 }
 

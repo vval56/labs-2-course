@@ -1,9 +1,8 @@
+#include <vector>
+#include <limits>
 #include "input_array.h"
 
 using namespace std;
-
-#include <vector>
-#include <limits>
 
 int check_int() {
     int number;

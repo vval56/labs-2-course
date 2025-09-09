@@ -22,7 +22,7 @@ class Array {
 
         Array& operator=(Array&& other) noexcept;
 
-        const int Size();
+        int Size() const;
         
         int Get(int index) const;
         
