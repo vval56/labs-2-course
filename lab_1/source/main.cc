@@ -1,4 +1,4 @@
-#include "input_array.h"
+#include "../headers/input_array.h"
 
 int main(){
     Array* array1 = nullptr;

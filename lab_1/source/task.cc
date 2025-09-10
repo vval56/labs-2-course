@@ -1,9 +1,9 @@
 #include <unordered_set>
-#include "task.h"
+#include "../headers/task.h"
 
 using namespace std;
 
-void find_intersection(Array* array1, Array* array2) {
+void find_intersection(const Array* array1, const Array* array2) {
     if (!array1 || !array2 || array1->Size() == 0 || array2->Size() == 0) {
         cout << "Массивы не инициализированы или пусты!" << endl;
         return;
@@ -22,7 +22,12 @@ void find_intersection(Array* array1, Array* array2) {
     sort(arr1.begin(), arr1.end());
     sort(arr2.begin(), arr2.end());
 
-    int i = 0 , j = 0;
+    // std::ranges::sort(arr1);
+    // std::ranges::sort(arr2);
+
+
+    int i = 0;
+    int j = 0;
 
     while (i < arr1.size() && j < arr2.size()) {
         if (arr1[i] < arr2[j]) {
@@ -30,7 +35,7 @@ void find_intersection(Array* array1, Array* array2) {
         } else if (arr1[i] > arr2[j]) {
             j++;
         } else {
-            if (intersection.empty() || intersection.back() != intersection[i]) {
+            if (intersection.empty() || intersection.back() != arr1[i]) {
                 intersection.push_back(arr1[i]);
             }
             i++;
@@ -48,7 +53,7 @@ void find_intersection(Array* array1, Array* array2) {
     }
 }
 
-void find_union(Array* array1, Array* array2) {
+void find_union(const Array* array1, const Array* array2) {
     if (!array1 || !array2 || array1->Size() == 0 || array2->Size() == 0) {
         cout << "Массивы не инициализированы или пусты!" << endl;
         return;

@@ -1,6 +1,6 @@
 #include <vector>
 #include <limits>
-#include "input_array.h"
+#include "../headers/input_array.h"
 
 using namespace std;
 
