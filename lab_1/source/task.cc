@@ -22,10 +22,6 @@ void find_intersection(const Array* array1, const Array* array2) {
     sort(arr1.begin(), arr1.end());
     sort(arr2.begin(), arr2.end());
 
-    // std::ranges::sort(arr1);
-    // std::ranges::sort(arr2);
-
-
     int i = 0;
     int j = 0;
 
