@@ -100,12 +100,3 @@ char& String::operator[](int index) {
 int String::Length() const {
     return length_;
 }
-
-ostream& operator<<(ostream& output_stream, const String& line) {
-    output_stream << line.text_;
-    return output_stream; 
-}
-
-istream& operator>>(istream& input_stream, String& line) {
-
-}
