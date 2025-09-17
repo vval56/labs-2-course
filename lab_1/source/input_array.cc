@@ -31,7 +31,7 @@ void hand_input(Array*& array1, Array*& array2) {
     vector<int> buff_array2;
     int number;
     
-    cout << "=== Ввод первого массива ===" << endl;
+    cout << "Ввод первого массива" << endl;
     cout << "Вводите числа. Для завершения ввода нажмите Enter дважды:\n";
     
     while (true) {
@@ -40,16 +40,13 @@ void hand_input(Array*& array1, Array*& array2) {
 
         if (cin.peek() == '\n') {
             cin.get(); 
-            if (cin.peek() == '\n') {
-                cin.get();
-                break;
-            }
+            break;
         }
     }
     
     array1 = new Array(buff_array1.size(), buff_array1.data());
     
-    cout << "\n=== Ввод второго массива ===" << endl;
+    cout << "\nВвод второго массива" << endl;
     cout << "Вводите числа. Для завершения ввода нажмите Enter дважды:\n";
     
     while (true) {
@@ -94,7 +91,7 @@ void press_enter_to_continue() {
 
 void show_menu(){
     cout << "1 - Ввести вручную массивы" << endl 
-         << "2 - Ввести случайный массивы" << endl
+         << "2 - Ввести случайные массивы" << endl
          << "3 - Посмотреть массивы" << endl
          << "4 - Пересечение массивов" << endl
          << "5 - Обьединение массивов" << endl 

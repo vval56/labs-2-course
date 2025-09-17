@@ -4,6 +4,8 @@
 
 using namespace std;
 
+Array::Array() : data(new int[1]), size_(1){}
+
 Array::Array(int size) : data(new int[size]), size_(size){}
 
 Array::Array(int size, const int* values): size_(size){   

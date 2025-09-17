@@ -6,7 +6,8 @@
 class Array {
     public:
         explicit Array(int size);
-       
+
+        Array();
 
         Array(int size, const int* values);   
 
