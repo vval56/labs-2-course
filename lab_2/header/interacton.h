@@ -2,5 +2,8 @@
 #define INTERACTION_H
 
 #include "string_class.h"
+#include <limits>
+
+void menu();
 
 #endif
