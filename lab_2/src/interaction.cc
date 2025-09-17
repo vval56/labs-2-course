@@ -57,7 +57,7 @@ void input_string(String & Text){
     cout << "Создана строка: '" << Text << "'\n";
 }
 
-void detect_empty_line(String & Text){
+void detect_empty_line(const String & Text){
     cout << "Текущая строка: '" << Text << "'\n";
     if (!Text) {
         cout << "Строка ПУСТАЯ\n";
@@ -66,7 +66,7 @@ void detect_empty_line(String & Text){
     }
 }
 
-void get_substring(String & Text){
+void get_substring(const String & Text){
     cout << "Текущая строка: '" << Text << "'\n";
     
                 
@@ -102,7 +102,7 @@ void change_symbol(String &Text){
     cout << "Измененная строка: '" << Text << "'\n";
 }
 
-void copy_str(String & Text){
+void copy_str(const String & Text){
     String copy = Text;
     cout << "Оригинал: '" << Text << "'\n";
     cout << "Копия: '" << copy << "'\n";
@@ -211,7 +211,7 @@ void menu() {
             }
                 
             case 12: {
-                cout << "Текущая строка: '" << Line << "'\n";
+                cout << "Ваша строка: '" << Line << "'\n";
                 cout << "Длина: " << Line.Length() << " символов\n";
                 break;
             }

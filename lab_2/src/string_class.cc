@@ -70,7 +70,7 @@ String String::operator()(int index1, int index2) const {
     }
     
     int substr_length = index2 - index1 + 1;
-    char* substring = new char[substr_length + 1];
+    auto substring = new char[substr_length + 1];
     
     for (int i = 0; i < substr_length; i++) {
         substring[i] = text_[index1 + i];
@@ -107,36 +107,5 @@ ostream& operator<<(ostream& output_stream, const String& line) {
 }
 
 istream& operator>>(istream& input_stream, String& line) {
-    string complete_input;
-    string temp_line;
-    int empty_line_count = 0;
-    
-    while (empty_line_count < 2) {
-        char buffer[1024];
-        input_stream.getline(buffer, 1024);
-        
-        temp_line = buffer;
-        
-        if (temp_line.empty()) {
-            empty_line_count++;
-        } else {
-            empty_line_count = 0;
-            if (!complete_input.empty()) {
-                complete_input += '\n';
-            }
-            complete_input += temp_line;
-        }
-        
-        if (input_stream.fail() && !input_stream.eof()) {
-            input_stream.clear();
-            input_stream.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-    }
 
-    delete[] line.text_;
-    line.length_ = complete_input.length();
-    line.text_ = new char[line.length_ + 1];
-    strcpy(line.text_, complete_input.c_str());
-    
-    return input_stream;
 }

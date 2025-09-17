@@ -7,7 +7,7 @@
 class String {
 public:
     String();
-    String(const char* text);
+    explicit String(const char* text);
     virtual ~String();
     String(const String& other);
     String& operator=(const String& other);
@@ -20,8 +20,44 @@ public:
     char& operator[](int index);
     int Length() const; 
 
-    friend std::ostream& operator<<(std::ostream& output_stream, const String& line);
-    friend std::istream& operator>>(std::istream& input_stream, String& line);
+    friend std::ostream& operator<<(std::ostream& output_stream, const String& line){
+        output_stream << line.text_;
+        return output_stream; 
+    }
+    friend std::istream& operator>>(std::istream& input_stream, String& line){
+        string complete_input;
+        string temp_line;
+        int empty_line_count = 0;
+        
+        while (empty_line_count < 2) {
+            char buffer[1024];
+            input_stream.getline(buffer, 1024);
+            
+            temp_line = buffer;
+            
+            if (temp_line.empty()) {
+                empty_line_count++;
+            } else {
+                empty_line_count = 0;
+                if (!complete_input.empty()) {
+                    complete_input += '\n';
+                }
+                complete_input += temp_line;
+            }
+            
+            if (input_stream.fail() && !input_stream.eof()) {
+                input_stream.clear();
+                input_stream.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+
+        delete[] line.text_;
+        line.length_ = complete_input.length();
+        line.text_ = new char[line.length_ + 1];
+        strcpy(line.text_, complete_input.c_str());
+        
+        return input_stream;
+    }   
 
 private:
     char* text_;
