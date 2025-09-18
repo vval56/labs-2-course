@@ -27,7 +27,7 @@ int check_int() {
 }
 
 void display_menu() {
-    cout << "\nМЕНЮ ТЕСТИРОВАНИЯ КЛАССА STRING \n";
+    cout << "\nМЕНЮ КЛАССА STRING \n";
     cout << "1. Проверить пуста ли строка (оператор !)\n";
     cout << "2. Получить подстроку (оператор ())\n";
     cout << "3. Получить символ по индексу (оператор [])\n";
@@ -112,18 +112,21 @@ void menu() {
             }
                 
             case 4: {
+                system("clear");
                 cout << "Текущая строка: '" << Line << "'\n";
                 cout << "Длина: " << Line.Length() << " символов\n";
                 break;
             }
                 
             case 5: {
+                system("clear");
                 cout << "Текущая строка: ";
                 cout << Line << endl;
                 break;
             }
                 
             case 6: {
+                system("clear");
                 cout << "Введите текст (дважды Enter для завершения):\n";
                 cin >> Line;
                 cout << "Введенная строка: '" << Line << "'\n";
@@ -135,12 +138,12 @@ void menu() {
                     cout << "Текущая строка пустая, нечего копировать\n";
                     break;
                 }
-                
-                
+                copy_str(Line);                
                 break;
             }
                 
             case 8: {
+                system("clear");
                 if (Line.Length() == 0) {
                     cout << "Текущая строка пустая, нечего перемещать\n";
                     break;
@@ -157,6 +160,7 @@ void menu() {
             }
                 
             case 0:
+                system("clear");
                 cout << "Выход из программы...\n";
                 break;
                 
@@ -165,7 +169,6 @@ void menu() {
         }
         
         if (choice != 0) {
-            system("clear");
             cout << "\nНажмите Enter для продолжения...";
             cin.get();
         }
