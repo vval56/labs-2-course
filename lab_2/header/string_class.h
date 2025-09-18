@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <cstring>
+#include <string> 
+#include <limits>  
 
 class String {
 public:
@@ -20,13 +22,14 @@ public:
     char& operator[](int index);
     int Length() const; 
 
-    friend std::ostream& operator<<(std::ostream& output_stream, const String& line){
+    friend std::ostream& operator<<(std::ostream& output_stream, const String& line) {
         output_stream << line.text_;
         return output_stream; 
     }
-    friend std::istream& operator>>(std::istream& input_stream, String& line){
-        string complete_input;
-        string temp_line;
+    
+    friend std::istream& operator>>(std::istream& input_stream, String& line) {
+        std::string complete_input;
+        std::string temp_line;
         int empty_line_count = 0;
         
         while (empty_line_count < 2) {
@@ -47,14 +50,14 @@ public:
             
             if (input_stream.fail() && !input_stream.eof()) {
                 input_stream.clear();
-                input_stream.ignore(numeric_limits<streamsize>::max(), '\n');
+                input_stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             }
         }
 
         delete[] line.text_;
         line.length_ = complete_input.length();
         line.text_ = new char[line.length_ + 1];
-        strcpy(line.text_, complete_input.c_str());
+        std::strcpy(line.text_, complete_input.c_str());
         
         return input_stream;
     }   

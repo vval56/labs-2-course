@@ -28,33 +28,16 @@ int check_int() {
 
 void display_menu() {
     cout << "\nМЕНЮ ТЕСТИРОВАНИЯ КЛАССА STRING \n";
-    cout << "1. Создать пустую строку\n";
-    cout << "2. Создать строку из текста\n";
-    cout << "3. Проверить пуста ли строка (оператор !)\n";
-    cout << "4. Получить подстроку (оператор ())\n";
-    cout << "5. Получить символ по индексу (оператор [])\n";
-    cout << "6. Изменить символ по индексу\n";
-    cout << "7. Вывести длину строки\n";
-    cout << "8. Вывести строку (оператор <<)\n";
-    cout << "9. Ввести строку (оператор >>)\n";
-    cout << "10. Копировать строку (конструктор копирования)\n";
-    cout << "11. Переместить строку (конструктор переноса)\n";
-    cout << "12. Показать текущую строку\n";
+    cout << "1. Проверить пуста ли строка (оператор !)\n";
+    cout << "2. Получить подстроку (оператор ())\n";
+    cout << "3. Получить символ по индексу (оператор [])\n";
+    cout << "4. Вывести длину строки\n";
+    cout << "5. Вывести строку (оператор <<)\n";
+    cout << "6. Ввести строку (оператор >>)\n";
+    cout << "7. Копировать строку (конструктор копирования)\n";
+    cout << "8. Переместить строку (конструктор переноса)\n";
     cout << "0. Выход\n";
     cout << "Выберите опцию: ";
-}
-
-void create_empty_line(String & Text){
-    Text = String();
-    cout << "Создана пустая строка\n";
-}
-
-void input_string(String & Text){
-    cout << "Введите текст: ";
-    char input[100];
-    cin.getline(input, 100);
-    Text = String(input);
-    cout << "Создана строка: '" << Text << "'\n";
 }
 
 void detect_empty_line(const String & Text){
@@ -87,21 +70,6 @@ void get_symbol(String Text){
     cout << "Символ по индексу " << index << ": '" << Text[index] << endl;
 }
 
-void change_symbol(String &Text){
-    cout << "Текущая строка: '" << Text << "'\n";
-
-    cout << "Введите индекс для изменения (от 0 до " << Text.Length() - 1 << "): ";
-    int index = check_int();
-                
-    cout << "Введите новый символ: ";
-    char new_symbol;
-    cin >> new_symbol;
-    cin.ignore();
-                
-    Text[index] = new_symbol;
-    cout << "Измененная строка: '" << Text << "'\n";
-}
-
 void copy_str(const String & Text){
     String copy = Text;
     cout << "Оригинал: '" << Text << "'\n";
@@ -116,26 +84,14 @@ void menu() {
         display_menu();
         choice = check_int();
         
-        switch (choice) {
+        switch (choice) {                
             case 1: {
-                system("clear");
-                create_empty_line(Line);
-                break;
-            }
-                
-            case 2: {
-                system("clear");
-                input_string(Line);
-                break;
-            }
-                
-            case 3: {
                 system("clear");
                 detect_empty_line(Line);
                 break;
             }
                 
-            case 4: {
+            case 2: {
                 system("clear");
                 if (!Line) {
                     cout << "Строка пустая, невозможно получить подстроку\n";
@@ -145,7 +101,7 @@ void menu() {
                 break;
             }
                 
-            case 5: {
+            case 3: {
                 system("clear");
                 if (!Line) {
                     cout << "Строка пустая, невозможно получить символ\n";
@@ -155,36 +111,26 @@ void menu() {
                 break;
             }
                 
-            case 6: {
-                system("clear");
-                if (!Line) {
-                    cout << "Строка пустая, невозможно изменить символ\n";
-                    break;
-                }
-                change_symbol(Line);
-                break;
-            }
-                
-            case 7: {
+            case 4: {
                 cout << "Текущая строка: '" << Line << "'\n";
                 cout << "Длина: " << Line.Length() << " символов\n";
                 break;
             }
                 
-            case 8: {
+            case 5: {
                 cout << "Текущая строка: ";
                 cout << Line << endl;
                 break;
             }
                 
-            case 9: {
+            case 6: {
                 cout << "Введите текст (дважды Enter для завершения):\n";
                 cin >> Line;
                 cout << "Введенная строка: '" << Line << "'\n";
                 break;
             }
                 
-            case 10: {
+            case 7: {
                 if (!Line) {
                     cout << "Текущая строка пустая, нечего копировать\n";
                     break;
@@ -194,7 +140,7 @@ void menu() {
                 break;
             }
                 
-            case 11: {
+            case 8: {
                 if (Line.Length() == 0) {
                     cout << "Текущая строка пустая, нечего перемещать\n";
                     break;
@@ -210,12 +156,6 @@ void menu() {
                 break;
             }
                 
-            case 12: {
-                cout << "Ваша строка: '" << Line << "'\n";
-                cout << "Длина: " << Line.Length() << " символов\n";
-                break;
-            }
-                
             case 0:
                 cout << "Выход из программы...\n";
                 break;
@@ -225,6 +165,7 @@ void menu() {
         }
         
         if (choice != 0) {
+            system("clear");
             cout << "\nНажмите Enter для продолжения...";
             cin.get();
         }
