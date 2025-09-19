@@ -67,7 +67,7 @@ void get_symbol(String Text){
     cout << "Введите индекс (от 1 до " << Text.Length() << "): ";
     int index = check_int();
     index--;             
-    cout << "Символ по индексу " << index << ": '" << Text[index] << endl;
+    cout << "Символ по индексу " << index + 1 << ": '" << Text[index] << endl;
 }
 
 void copy_str(const String & Text){
