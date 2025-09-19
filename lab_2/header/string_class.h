@@ -27,40 +27,44 @@ public:
         return output_stream; 
     }
     
+
+
     friend std::istream& operator>>(std::istream& input_stream, String& line) {
         std::string complete_input;
-        std::string temp_line;
         int empty_line_count = 0;
         
-        while (empty_line_count < 2) {
-            char buffer[1024];
-            input_stream.getline(buffer, 1024);
+        while (empty_line_count < 2 && input_stream) {
+            std::string current_line;
+
+            if (!std::getline(input_stream, current_line)) {
+                if (input_stream.eof()) {
+                    break;
+                }
+
+                input_stream.clear();
+                input_stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                continue;
+            }
             
-            temp_line = buffer;
-            
-            if (temp_line.empty()) {
+            if (current_line.empty()) {
                 empty_line_count++;
             } else {
                 empty_line_count = 0;
                 if (!complete_input.empty()) {
                     complete_input += '\n';
                 }
-                complete_input += temp_line;
-            }
-            
-            if (input_stream.fail() && !input_stream.eof()) {
-                input_stream.clear();
-                input_stream.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                complete_input += current_line;
             }
         }
 
         delete[] line.text_;
-        line.length_ = complete_input.length();
+        line.length_ = complete_input.size();
         line.text_ = new char[line.length_ + 1];
-        std::strcpy(line.text_, complete_input.c_str());
+        std::strncpy(line.text_, complete_input.c_str(), line.length_);
+        line.text_[line.length_] = '\0'; 
         
         return input_stream;
-    }   
+    }
 
 private:
     char* text_;

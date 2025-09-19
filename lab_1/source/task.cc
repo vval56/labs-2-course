@@ -1,5 +1,9 @@
 #include <unordered_set>
 #include "../headers/task.h"
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <ranges> // обязательно!
 
 using namespace std;
 
@@ -19,8 +23,8 @@ void find_intersection(const Array* array1, const Array* array2) {
         arr2.push_back(array2->Get(i));
     }
 
-    sort(arr1.begin(), arr1.end());
-    sort(arr2.begin(), arr2.end());
+    ranges::sort(arr1);
+    ranges::sort(arr2);
 
     int i = 0;
     int j = 0;
