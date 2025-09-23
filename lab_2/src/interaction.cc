@@ -35,7 +35,7 @@ void display_menu() {
     cout << "5. Вывести строку (оператор <<)\n";
     cout << "6. Ввести строку (оператор >>)\n";
     cout << "7. Копировать строку (конструктор копирования)\n";
-    cout << "8. Переместить строку (конструктор переноса)\n";
+    
     cout << "0. Выход\n";
     cout << "Выберите опцию: ";
 }
@@ -52,7 +52,6 @@ void detect_empty_line(const String & Text){
 void get_substring(const String & Text){
     cout << "Текущая строка: '" << Text << "'\n";
     
-                
     cout << "Введите начальный индекс (от 0): ";
     int start = check_int();
     cout << "Введите конечный индекс (до " << Text.Length() - 1 << "): ";
@@ -139,23 +138,6 @@ void menu() {
                     break;
                 }
                 copy_str(Line);                
-                break;
-            }
-                
-            case 8: {
-                system("clear");
-                if (Line.Length() == 0) {
-                    cout << "Текущая строка пустая, нечего перемещать\n";
-                    break;
-                }
-                
-                cout << "До перемещения: '" << Line << "'\n";
-                
-                String moved = std::move(Line);
-                cout << "После перемещения:\n";
-                cout << "Перемещенная строка: '" << moved << "'\n";
-                cout << "Оригинал (должен быть пустым): '" << Line << "'\n";
-                Line = std::move(moved);
                 break;
             }
                 
