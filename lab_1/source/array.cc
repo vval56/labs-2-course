@@ -20,7 +20,7 @@ Array::Array(int size, bool is_random) : size_(size) {
     if(is_random) {
         static random_device rd;
         static mt19937 gen(rd());
-        uniform_int_distribution dist(0, 100);
+        uniform_int_distribution dist(0, 20);
 
         for(int i = 0; i < size_; i++) {
             data[i] = dist(gen);

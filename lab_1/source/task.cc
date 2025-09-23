@@ -43,7 +43,7 @@ void find_intersection(const Array* array1, const Array* array2) {
         }
     }
 
-    cout << "Пересечение составялет " << intersection.size() << "элементов." << endl;
+    cout << "\nПересечение составялет " << intersection.size() << " элементов." << endl;
     if(!intersection.empty()){
         cout << "{";
         for (int num : intersection)
@@ -79,7 +79,7 @@ void find_union(const Array* array1, const Array* array2) {
         union_set.insert(num);
     }
     
-    cout << "Объединение (" << union_set.size() << " элементов): ";
+    cout << "\nОбъединение (" << union_set.size() << " элементов): ";
     for (int num : union_set) {
         cout << num << " ";
     }

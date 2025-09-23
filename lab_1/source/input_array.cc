@@ -127,12 +127,14 @@ void show_menu(){
             
         case 4:
             system("clear");
+            show_arrays(array1, array2);
             find_intersection(array1, array2);
             press_enter_to_continue();
             break;
             
         case 5:
             system("clear");
+            show_arrays(array1, array2);
             find_union(array1, array2);
             press_enter_to_continue();
             break;

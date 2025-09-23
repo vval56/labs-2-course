@@ -80,6 +80,7 @@ void menu() {
     int choice;
     
     do {
+        system("clear");
         display_menu();
         choice = check_int();
         
