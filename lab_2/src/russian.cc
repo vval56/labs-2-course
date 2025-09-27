@@ -1,16 +1,17 @@
 #include "../header/russian.h"
+#include <cstddef>
 
 char** get_utf8_chars(const char* str) {
     size_t len = strlen(str);
     std::vector<char*> chars_vector;
     
     for (size_t i = 0; i < len;) {
-        auto c = static_cast<unsigned char>(str[i]);
+        std::byte c = static_cast<std::byte>(str[i]);
         int char_len = 1;
         
-        if ((c & 0xF0) == 0xF0) char_len = 4;
-        else if ((c & 0xE0) == 0xE0) char_len = 3;
-        else if ((c & 0xC0) == 0xC0) char_len = 2;
+        if ((c & std::byte{0xF0}) == std::byte{0xF0}) char_len = 4;
+        else if ((c & std::byte{0xE0}) == std::byte{0xE0}) char_len = 3;
+        else if ((c & std::byte{0xC0}) == std::byte{0xC0}) char_len = 2;
         else char_len = 1;
         
         char* character = static_cast<char*>(malloc(char_len + 1));
@@ -38,12 +39,12 @@ size_t utf8_strlen(const char* str) {
     size_t len = strlen(str);
     
     for (size_t i = 0; i < len;) {
-        auto c = static_cast<unsigned char>(str[i]);
+        std::byte c = static_cast<std::byte>(str[i]);
         int char_len = 1;
         
-        if ((c & 0xF0) == 0xF0) char_len = 4;
-        else if ((c & 0xE0) == 0xE0) char_len = 3;
-        else if ((c & 0xC0) == 0xC0) char_len = 2;
+        if ((c & std::byte{0xF0}) == std::byte{0xF0}) char_len = 4;
+        else if ((c & std::byte{0xE0}) == std::byte{0xE0}) char_len = 3;
+        else if ((c & std::byte{0xC0}) == std::byte{0xC0}) char_len = 2;
         else char_len = 1;
         
         count++;
@@ -61,7 +62,7 @@ char* utf8_substr(const char* str, size_t start, size_t length) {
             free(chars[i]);
         }
         free(chars);
-        char* empty = static_cast<char*>(malloc(1));
+        auto empty = static_cast<char*>(malloc(1));
         empty[0] = '\0';
         return empty;
     }
@@ -95,7 +96,7 @@ char* utf8_char_at(const char* str, size_t index) {
         }
         free(chars);
         
-        char* empty = static_cast<char*>(malloc(1));
+        auto empty = static_cast<char*>(malloc(1));
         empty[0] = '\0';
         return empty;
     }
