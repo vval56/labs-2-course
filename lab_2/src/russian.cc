@@ -5,7 +5,7 @@ char** get_utf8_chars(const char* str) {
     std::vector<char*> chars_vector;
     
     for (size_t i = 0; i < len;) {
-        unsigned char c = static_cast<unsigned char>(str[i]);
+        auto c = static_cast<unsigned char>(str[i]);
         int char_len = 1;
         
         if ((c & 0xF0) == 0xF0) char_len = 4;
@@ -24,11 +24,11 @@ char** get_utf8_chars(const char* str) {
         i += char_len;
     }
     
-    char** result = static_cast<char**>(malloc((chars_vector.size() + 1) * sizeof(char*)));
+    auto result = static_cast<char**>(malloc((chars_vector.size() + 1) * sizeof(char*)));
     for (size_t i = 0; i < chars_vector.size(); i++) {
         result[i] = chars_vector[i];
     }
-    result[chars_vector.size()] = NULL; 
+    result[chars_vector.size()] = nullptr; 
     
     return result;
 }
@@ -38,7 +38,7 @@ size_t utf8_strlen(const char* str) {
     size_t len = strlen(str);
     
     for (size_t i = 0; i < len;) {
-        unsigned char c = static_cast<unsigned char>(str[i]);
+        auto c = static_cast<unsigned char>(str[i]);
         int char_len = 1;
         
         if ((c & 0xF0) == 0xF0) char_len = 4;
@@ -55,32 +55,30 @@ size_t utf8_strlen(const char* str) {
 
 char* utf8_substr(const char* str, size_t start, size_t length) {
     char** chars = get_utf8_chars(str);
-    size_t total_chars = utf8_strlen(str);
     
-    if (start >= total_chars) {
-        for (size_t i = 0; chars[i] != NULL; i++) {
+    if (size_t total_chars = utf8_strlen(str); start >= total_chars) {
+        for (size_t i = 0; chars[i] != nullptr; i++) {
             free(chars[i]);
         }
         free(chars);
-
         char* empty = static_cast<char*>(malloc(1));
         empty[0] = '\0';
         return empty;
     }
     
     size_t total_bytes = 0;
-    for (size_t i = start; i < start + length && chars[i] != NULL; i++) {
+    for (size_t i = start; i < start + length && chars[i] != nullptr; i++) {
         total_bytes += strlen(chars[i]);
     }
 
-    char* result = static_cast<char*>(malloc(total_bytes + 1));
+    auto result = static_cast<char*>(malloc(total_bytes + 1));
     result[0] = '\0';  
     
-    for (size_t i = start; i < start + length && chars[i] != NULL; i++) {
+    for (size_t i = start; i < start + length && chars[i] != nullptr; i++) {
         strcat(result, chars[i]);
     }
     
-    for (size_t i = 0; chars[i] != NULL; i++) {
+    for (size_t i = 0; chars[i] != nullptr; i++) {
         free(chars[i]);
     }
     free(chars);
@@ -90,10 +88,9 @@ char* utf8_substr(const char* str, size_t start, size_t length) {
 
 char* utf8_char_at(const char* str, size_t index) {
     char** chars = get_utf8_chars(str);
-    size_t total_chars = utf8_strlen(str);
     
-    if (index >= total_chars) {
-        for (size_t i = 0; chars[i] != NULL; i++) {
+    if (size_t total_chars = utf8_strlen(str); index >= total_chars) {
+        for (size_t i = 0; chars[i] != nullptr; i++) {
             free(chars[i]);
         }
         free(chars);
@@ -103,9 +100,10 @@ char* utf8_char_at(const char* str, size_t index) {
         return empty;
     }
 
-    char* result = static_cast<char*>(malloc(strlen(chars[index]) + 1));
+    auto result = static_cast<char*>(malloc(strlen(chars[index]) + 1));
     strcpy(result, chars[index]);
-    for (size_t i = 0; chars[i] != NULL; i++) {
+    
+    for (size_t i = 0; chars[i] != nullptr; i++) {
         free(chars[i]);
     }
     free(chars);
