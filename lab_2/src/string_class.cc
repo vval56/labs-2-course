@@ -1,8 +1,4 @@
 #include "../header/string_class.h"
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <limits>
 
 using namespace std;
 
@@ -70,33 +66,17 @@ String String::operator()(int index1, int index2) const {
     }
     
     int substr_length = index2 - index1 + 1;
-    auto substring = new char[substr_length + 1];
-    
-    for (int i = 0; i < substr_length; i++) {
-        substring[i] = text_[index1 + i];
-    }
-    substring[substr_length] = '\0';
+    auto substring = utf8_substr(text_, index1, substr_length);
     
     String result(substring);
     delete[] substring;
     return result;
 }
 
-char String::operator[](int index) const {
-    if (index < 0 || index >= length_) {
-        return '\0';
-    }
-    return text_[index];
-}
-
-char& String::operator[](int index) {
-    if (index < 0 || index >= length_) {
-        static char dummy = '\0';
-        return dummy;
-    }
-    return text_[index];
+char* String::operator[](int index) const {
+    return utf8_char_at(text_, index);
 }
 
 int String::Length() const {
-    return length_;
+    return utf8_strlen(text_);
 }

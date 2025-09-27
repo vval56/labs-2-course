@@ -52,21 +52,40 @@ void detect_empty_line(const String & Text){
 void get_substring(const String & Text){
     cout << "Текущая строка: '" << Text << "'\n";
     
-    cout << "Введите начальный индекс (от 0): ";
-    int start = check_int();
-    cout << "Введите конечный индекс (до " << Text.Length() - 1 << "): ";
-    int end = check_int();
+    cout << "Введите начальный индекс (от 0 до " << Text.Length() - 1 << "): ";
+    int start;
+    do{
+        start = check_int();
+        if(start < 0 || start >= Text.Length()){
+            cout << "Неверный ввод индекса. Допустимый диапазон: 0-" << Text.Length() - 1 << ": ";
+        }
+    }while(start < 0 || start >= Text.Length());
+
+    cout << "Введите конечный индекс (от " << start << " до " << Text.Length() - 1 << "): ";
+    int end;
+    do{
+        end = check_int();
+        if(end < start || end >= Text.Length()){
+            cout << "Неверный ввод индекса. Допустимый диапазон: " << start << "-" << Text.Length() - 1 << ": ";
+        }
+    }while(end < start || end >= Text.Length());
                 
     String Substring = Text(start, end);
     cout << "Подстрока: '" << Substring << "'\n";
 }
 
-void get_symbol(String Text){
+void get_symbol(const String & Text){
     cout << "Текущая строка: '" << Text << "'\n";
-    cout << "Введите индекс (от 1 до " << Text.Length() << "): ";
-    int index = check_int();
-    index--;             
-    cout << "Символ по индексу " << index + 1 << ": '" << Text[index] << endl;
+    cout << "Введите индекс (от 0 до " << Text.Length() - 1 << "): ";
+    int index;
+    do{
+        index = check_int();
+        if(index < 0 || index >= Text.Length()){
+            cout << "Неверный ввод индекса. Допустимый диапазон: 0-" << Text.Length() - 1 << ": ";
+        }
+    }while(index < 0 || index >= Text.Length());        
+    
+    cout << "Символ по индексу " << index << ": '" << Text[index] << "'" << endl;
 }
 
 void copy_str(const String & Text){

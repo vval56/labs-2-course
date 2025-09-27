@@ -8,6 +8,6 @@ class Shapes{
 
     private:
         
-}
+};
 
 #endif

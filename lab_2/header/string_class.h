@@ -4,7 +4,8 @@
 #include <iostream>
 #include <cstring>
 #include <string> 
-#include <limits>  
+#include <limits>
+#include "russian.h"
 
 class String {
 public:
@@ -18,16 +19,13 @@ public:
     
     bool operator!() const;
     String operator()(int index1, int index2) const;
-    char operator[](int index) const;
-    char& operator[](int index);
+    char* operator[](int index) const;
     int Length() const; 
 
     friend std::ostream& operator<<(std::ostream& output_stream, const String& line) {
         output_stream << line.text_;
         return output_stream; 
     }
-    
-
 
     friend std::istream& operator>>(std::istream& input_stream, String& line) {
         std::string complete_input;
