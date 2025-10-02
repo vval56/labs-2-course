@@ -54,7 +54,7 @@ bool intersect_2_shapes(const Shape * shape1, const Shape * shape2){
         cout << "Ошибка: фигуры не созданы\n";
         return false;
     }
-    return shape1->intersect_with(shape2);
+    return shape2->intersect_with(shape1);
 }
 
 void choose_figure(Shape *& Shape){
