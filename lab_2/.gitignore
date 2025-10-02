@@ -1,0 +1,84 @@
+# Игнорируем скомпилированные объектные файлы
+*.o
+*.obj
+
+# Игнорируем исполняемые файлы
+*.exe
+*.out
+*.app
+
+# Игнорируем статические и динамические библиотеки
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# Игнорируем файлы предкомпилированных заголовков
+*.gch
+*.pch
+
+# Игнорируем файлы зависимостей
+*.d
+
+# Игнорируем файлы сборки (Makefile, CMake)
+/build/
+/out/
+/bin/
+/lib/
+/obj/
+/x64/
+/x86/
+/Debug/
+/Release/
+/CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.make
+
+# Игнорируем файлы IDE
+/.vs/
+/.vscode/
+/.clion/
+/.idea/
+*.sln
+*.vcxproj*
+*.filters
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.db
+
+# Игнорируем резервные копии и временные файлы
+*~
+*.bak
+*.tmp
+*.swp
+*.swo
+
+# Игнорируем файлы документации
+*.log
+*.toc
+*.aux
+*.dvi
+*.lof
+*.lot
+*.fls
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+
+# Игнорируем системные файлы
+.DS_Store
+Thumbs.db
+
+# Игнорируем файлы пакетных менеджеров (vcpkg, conan)
+/vcpkg_installed/
+/.conan/
+/conan.lock
+
+# Игнорируем кэш-файлы
+.cache/
