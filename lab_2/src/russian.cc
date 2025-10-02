@@ -6,7 +6,7 @@ char** get_utf8_chars(const char* str) {
     std::vector<char*> chars_vector;
     
     for (size_t i = 0; i < len;) {
-        std::byte c = static_cast<std::byte>(str[i]);
+        auto c = static_cast<std::byte>(str[i]);
         int char_len = 1;
         
         if ((c & std::byte{0xF0}) == std::byte{0xF0}) char_len = 4;
@@ -14,7 +14,7 @@ char** get_utf8_chars(const char* str) {
         else if ((c & std::byte{0xC0}) == std::byte{0xC0}) char_len = 2;
         else char_len = 1;
         
-        char* character = static_cast<char*>(malloc(char_len + 1));
+        auto character = static_cast<char*>(malloc(char_len + 1));
         
         for (int j = 0; j < char_len; j++) {
             character[j] = str[i + j];
@@ -39,7 +39,7 @@ size_t utf8_strlen(const char* str) {
     size_t len = strlen(str);
     
     for (size_t i = 0; i < len;) {
-        std::byte c = static_cast<std::byte>(str[i]);
+        auto c = static_cast<std::byte>(str[i]);
         int char_len = 1;
         
         if ((c & std::byte{0xF0}) == std::byte{0xF0}) char_len = 4;
