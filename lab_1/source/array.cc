@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Array::Array() : data(new int[1]), size_(1){}
+Array::Array() : data(new int[1]), size_(1){}  // NOSONAR - required by assignment
 
 Array::Array(int size) : data(new int[size]), size_(size){}
 
