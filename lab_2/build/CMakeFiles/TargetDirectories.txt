@@ -1,3 +1,0 @@
-/Users/vladislavmogilnyj/programming2course/labs/lab_2/build/CMakeFiles/lab_2.dir
-/Users/vladislavmogilnyj/programming2course/labs/lab_2/build/CMakeFiles/edit_cache.dir
-/Users/vladislavmogilnyj/programming2course/labs/lab_2/build/CMakeFiles/rebuild_cache.dir

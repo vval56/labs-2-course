@@ -1,1 +1,0 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/lab_2.dir/src/main.cc.o CMakeFiles/lab_2.dir/src/interaction.cc.o CMakeFiles/lab_2.dir/src/string_class.cc.o CMakeFiles/lab_2.dir/src/russian.cc.o -o lab_2
