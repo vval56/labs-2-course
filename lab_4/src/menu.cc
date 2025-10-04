@@ -42,7 +42,7 @@ void print_menu(){
          << "0 - Выход\n";
 }
 
-Shape* create_figure(int choice, double *params){
+Shape* create_figure(int choice, const double *params){
     switch (choice){
     case 1: return new Circle(params);
     case 2: return new Rectangle(params);
