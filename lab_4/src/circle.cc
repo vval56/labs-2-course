@@ -1,9 +1,9 @@
 #include "../headers/circle.h"
 
-Circle::Circle(double * parametrs) : radius_(parametrs[0]), name("Круг"){}
+constexpr double PI = 3.14159265358979323846;
 
 double Circle::Square() const {
-    return radius_ * radius_ * 3.14;
+    return radius_ * radius_ * PI;
 }
 
 void Circle::Parametrs() const {

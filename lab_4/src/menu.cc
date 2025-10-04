@@ -11,14 +11,13 @@ double check_double() {
     string input;
     
     while (true) {
-        getline(cin, input);
-        stringstream ss(input);
-        
-        if (ss >> number && ss.eof()) {
-            return number;
-        }
-        cout << "Ошибка. Введите число: ";
+    getline(cin, input);
+    
+    if (stringstream ss(input); ss >> number && ss.eof()) {
+        return number;
     }
+    cout << "Ошибка. Введите число: ";
+}
 }
 
 int check_int() {
@@ -26,13 +25,12 @@ int check_int() {
     string input;
     
     while (true) {
-        getline(cin, input);
-        stringstream ss(input);
-        
-        if (ss >> number && ss.eof()) {
-            return number;
-        }
-        cout << "Ошибка. Введите целое число: ";
+    getline(cin, input);
+    
+    if (stringstream ss(input); ss >> number && ss.eof()) {
+        return number;
+    }
+    cout << "Ошибка. Введите число: ";
     }
 }
 
@@ -121,7 +119,7 @@ void menu(){
 
             Shape* newShape = nullptr;
             choose_figure(newShape);
-            Shape **newArr = new Shape*[size_shapes + 1];
+            auto **newArr = new Shape*[size_shapes + 1];
             for (int i = 0; i < size_shapes; i++) {
                 newArr[i] = Shapes[i];
             }

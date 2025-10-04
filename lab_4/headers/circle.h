@@ -6,14 +6,14 @@
 
 class Circle : public Shape {
 public:
-    explicit Circle(double * parametrs);
+    explicit Circle(const double * parametrs) : radius_(parametrs[0]) {}
     double Square() const override;
     void Parametrs() const override;
     std::string Name() const override;
 private:
     double radius_;
     double square_;
-    std::string name;
+    std::string name = "Круг";
 };
 
 #endif
