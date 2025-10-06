@@ -77,7 +77,7 @@ Thumbs.db
 
 # Игнорируем файлы пакетных менеджеров (vcpkg, conan)
 /vcpkg_installed/
-/.conan/
+/.conan/ 
 /conan.lock
 
 # Игнорируем кэш-файлы
