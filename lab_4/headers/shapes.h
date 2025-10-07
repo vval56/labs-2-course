@@ -11,9 +11,9 @@ class Trapezoid;
 class Shape {
 public:
     virtual ~Shape() = default;
-    virtual double Square() const = 0;
-    virtual std::string Name() const = 0;
-    virtual void Parametrs() const = 0;
+    virtual double square() const = 0;
+    virtual std::string name() const = 0;
+    virtual void parametrs() const = 0;
 };
 
 #endif

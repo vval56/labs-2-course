@@ -7,14 +7,14 @@
 class Triangle : public Shape {
 public:
     explicit Triangle(const double * parametrs) : side1_(parametrs[0]), side2_(parametrs[1]) {}
-    double Square() const override;
-    void Parametrs() const override;
-    std::string Name() const override;
+    double square() const override;
+    void parametrs() const override;
+    std::string name() const override;
 private:
     double side1_;
     double side2_;
     double square_;
-    std::string name = "Треугольник";
+    std::string name_ = "Треугольник";
 };
 
 #endif

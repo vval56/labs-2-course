@@ -2,14 +2,14 @@
 
 constexpr double PI = 3.14159265358979323846;
 
-double Circle::Square() const {
+double Circle::square() const {
     return radius_ * radius_ * PI;
 }
 
-void Circle::Parametrs() const {
+void Circle::parametrs() const {
     std::cout << "радиус : " << radius_ << "\n" ;
 }
 
-std::string Circle::Name() const {
-    return name;
+std::string Circle::name() const {
+    return name_;
 }

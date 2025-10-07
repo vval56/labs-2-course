@@ -1,13 +1,13 @@
 #include "../headers/rectangle.h"
 
-double Rectangle::Square() const {
+double Rectangle::square() const {
     return side1_ * side2_;
 }
 
-void Rectangle::Parametrs() const {
+void Rectangle::parametrs() const {
     std::cout << "стороны : " << side1_ << ", " << side2_ << "\n" ;
 }
 
-std::string Rectangle::Name() const{
-    return name;
+std::string Rectangle::name() const{
+    return name_;
 }

@@ -137,7 +137,7 @@ void menu(){
                 break;
             }
             for(int i = 0; i < size_shapes; i++)
-                cout << "Площадь фигуры '" << Shapes[i]->Name() << "' : " << Shapes[i]->Square() << "\n";
+                cout << "Площадь фигуры '" << Shapes[i]->name() << "' : " << Shapes[i]->square() << "\n";
             break;
         
         case 3:
@@ -149,8 +149,8 @@ void menu(){
 
             cout << "Список всех фигур\n";
             for(int i = 0; i < size_shapes; i++){
-                cout << "Фигура " << Shapes[i]->Name() << " ";
-                Shapes[i]->Parametrs();
+                cout << "Фигура " << Shapes[i]->name() << " ";
+                Shapes[i]->parametrs();
             }
             break;
         

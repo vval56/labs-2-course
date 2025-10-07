@@ -1,13 +1,13 @@
 #include "../headers/triangle.h"
 
-double Triangle::Square() const {
+double Triangle::square() const {
     return side1_ * side2_ / 2;
 }
 
-void Triangle::Parametrs() const {
+void Triangle::parametrs() const {
     std::cout << "катеты : " << side1_ << ", " << side2_ << "\n" ;
 }
 
-std::string Triangle::Name() const {
-    return name;
+std::string Triangle::name() const {
+    return name_;
 }
