@@ -55,8 +55,8 @@ bool isDouble(const string &s) {
 }
 
 template<typename T>
-void finalize_queue_creation(Queue_array& queueManager, Queue<T>* q, const string& type_name) {
-    int index = queueManager.create_queue(q);
+void finalize_queue_creation(Queue_array& queues, Queue<T>* q, const string& type_name) {
+    int index = queues.create_queue(q);
     cout << "Создана очередь типа " << type_name << " (индекс: " << index << "):\n";
     q->print();
 }
@@ -75,7 +75,7 @@ vector<string> read_input_lines() {
     return inputs;
 }
 
-void create_int_queue(Queue_array& queueManager, const vector<string>& inputs) {
+void create_int_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<int>();
     
     for (auto &val : inputs) {
@@ -87,10 +87,10 @@ void create_int_queue(Queue_array& queueManager, const vector<string>& inputs) {
         q->enqueue(stoi(val));
     }
     
-    finalize_queue_creation(queueManager, q, "int");
+    finalize_queue_creation(queues, q, "int");
 }
 
-void create_double_queue(Queue_array& queueManager, const vector<string>& inputs) {
+void create_double_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<double>();
     
     for (auto &val : inputs) {
@@ -102,10 +102,10 @@ void create_double_queue(Queue_array& queueManager, const vector<string>& inputs
         q->enqueue(stod(val));
     }
     
-    finalize_queue_creation(queueManager, q, "double");
+    finalize_queue_creation(queues, q, "double");
 }
 
-void create_char_queue(Queue_array& queueManager, const vector<string>& inputs) {
+void create_char_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<char>();
     
     for (auto &val : inputs) {
@@ -117,37 +117,37 @@ void create_char_queue(Queue_array& queueManager, const vector<string>& inputs) 
         q->enqueue(val[0]);
     }
     
-    finalize_queue_creation(queueManager, q, "char");
+    finalize_queue_creation(queues, q, "char");
 }
 
-void create_string_queue(Queue_array& queueManager, const vector<string>& inputs) {
+void create_string_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<string>();
     
     for (auto &val : inputs) {
         q->enqueue(val);
     }
     
-    finalize_queue_creation(queueManager, q, "string");
+    finalize_queue_creation(queues, q, "string");
 }
 
-void create_queue_by_type(Queue_array& queueManager, const vector<string>& inputs) {
+void create_queue_by_type(Queue_array& queues, const vector<string>& inputs) {
     string first = inputs[0];
     
     if (isInt(first)) {
-        create_int_queue(queueManager, inputs);
+        create_int_queue(queues, inputs);
     }
     else if (isDouble(first)) {
-        create_double_queue(queueManager, inputs);
+        create_double_queue(queues, inputs);
     }
     else if (first.size() == 1) {
-        create_char_queue(queueManager, inputs);
+        create_char_queue(queues, inputs);
     }
     else {
-        create_string_queue(queueManager, inputs);
+        create_string_queue(queues, inputs);
     }
 }
 
-void create_queue_auto(Queue_array& queueManager) {
+void create_queue_auto(Queue_array& queues) {
     vector<string> inputs = read_input_lines();
     
     if (inputs.empty()) {
@@ -155,13 +155,13 @@ void create_queue_auto(Queue_array& queueManager) {
         return;
     }
 
-    create_queue_by_type(queueManager, inputs);
+    create_queue_by_type(queues, inputs);
 }
 
 template<typename T>
-void handle_successful_addition(Queue_array& queueManager, int index, const string& type_name) {
+void handle_successful_addition(Queue_array& queues, int index, const string& type_name) {
     cout << "Элемент добавлен!\n";
-    Queue<T>* q = queueManager.get_queue<T>(index);
+    Queue<T>* q = queues.get_queue<T>(index);
     if (q) {
         cout << "Обновленная очередь " << type_name << ": ";
         q->print();
@@ -191,61 +191,61 @@ int get_queue_type_choice() {
     return type_choice;
 }
 
-void add_int_element(Queue_array& queueManager, int index) {
+void add_int_element(Queue_array& queues, int index) {
     int value = check_numbers<int>();
-    if (queueManager.enqueue(index, value)) {
-        handle_successful_addition<int>(queueManager, index, "int");
+    if (queues.enqueue(index, value)) {
+        handle_successful_addition<int>(queues, index, "int");
     } else {
         cout << "Очередь не найдена!\n";
     }
 }
 
-void add_double_element(Queue_array& queueManager, int index) {
+void add_double_element(Queue_array& queues, int index) {
     double value = check_numbers<double>();
-    if (queueManager.enqueue(index, value)) {
-        handle_successful_addition<double>(queueManager, index, "double");
+    if (queues.enqueue(index, value)) {
+        handle_successful_addition<double>(queues, index, "double");
     } else {
         cout << "Очередь не найдена!\n";
     }
 }
-void add_char_element(Queue_array& queueManager, int index) {
+void add_char_element(Queue_array& queues, int index) {
     char value;
     string input;
     getline(cin, input);
     if (!input.empty()) value = input[0];
     
-    if (queueManager.enqueue(index, value)) {
-        handle_successful_addition<char>(queueManager, index, "char");
+    if (queues.enqueue(index, value)) {
+        handle_successful_addition<char>(queues, index, "char");
     } else {
         cout << "Очередь не найдена!\n";
     }
 }
 
-void add_string_element(Queue_array& queueManager, int index) {
+void add_string_element(Queue_array& queues, int index) {
     string value;
     getline(cin, value);
     
-    if (queueManager.enqueue(index, value)) {
-        handle_successful_addition<string>(queueManager, index, "string");
+    if (queues.enqueue(index, value)) {
+        handle_successful_addition<string>(queues, index, "string");
     } else {
         cout << "Очередь не найдена!\n";
     }
 }
 
-void process_element_addition(Queue_array& queueManager, int type_choice, int index) {
+void process_element_addition(Queue_array& queues, int type_choice, int index) {
     cout << "Введите значение для добавления: ";
     
     switch (type_choice) {
-        case 1: add_int_element(queueManager, index); break;
-        case 2: add_double_element(queueManager, index); break;
-        case 3: add_char_element(queueManager, index); break;
-        case 4: add_string_element(queueManager, index); break;
+        case 1: add_int_element(queues, index); break;
+        case 2: add_double_element(queues, index); break;
+        case 3: add_char_element(queues, index); break;
+        case 4: add_string_element(queues, index); break;
         default: cout << "Неверно введено число\n";
     }
 }
 
-void add_element_to_queue(Queue_array& queueManager) {
-    queueManager.print_all();
+void add_element_to_queue(Queue_array& queues) {
+    queues.print_all();
     
     int type_choice = get_queue_type_choice();
     if (type_choice == 0) return;
@@ -253,11 +253,11 @@ void add_element_to_queue(Queue_array& queueManager) {
     cout << "Введите индекс очереди: ";
     int index = check_numbers<int>();
     
-    process_element_addition(queueManager, type_choice, index);
+    process_element_addition(queues, type_choice, index);
 }
 
-void remove_element_from_queue(Queue_array& queueManager) {
-    queueManager.print_all();
+void remove_element_from_queue(Queue_array& queues) {
+    queues.print_all();
     cout << "Выберите тип очереди:\n"
          << "1 - int\n"
          << "2 - double\n"
@@ -278,16 +278,16 @@ void remove_element_from_queue(Queue_array& queueManager) {
     
     switch (type_choice) {
         case 1:
-            success = queueManager.dequeue<int>(index);
+            success = queues.dequeue<int>(index);
             break;
         case 2:
-            success = queueManager.dequeue<double>(index);
+            success = queues.dequeue<double>(index);
             break;
         case 3:
-            success = queueManager.dequeue<char>(index);
+            success = queues.dequeue<char>(index);
             break;
         case 4:
-            success = queueManager.dequeue<string>(index);
+            success = queues.dequeue<string>(index);
             break;
         default:
             cout << "Неверно введен индекс\n";
@@ -299,19 +299,19 @@ void remove_element_from_queue(Queue_array& queueManager) {
         cout << "Элемент удален!\n";
         switch (type_choice) {
             case 1: {
-                if (Queue<int>* q = queueManager.get_queue<int>(index)) { cout << "Обновленная очередь: "; q->print(); }
+                if (Queue<int>* q = queues.get_queue<int>(index)) { cout << "Обновленная очередь: "; q->print(); }
                 break;
             }
             case 2: {
-                if (Queue<double>* q = queueManager.get_queue<double>(index)) { cout << "Обновленная очередь: "; q->print(); }
+                if (Queue<double>* q = queues.get_queue<double>(index)) { cout << "Обновленная очередь: "; q->print(); }
                 break;
             }
             case 3: {
-                if (Queue<char>* q = queueManager.get_queue<char>(index)) { cout << "Обновленная очередь: "; q->print(); }
+                if (Queue<char>* q = queues.get_queue<char>(index)) { cout << "Обновленная очередь: "; q->print(); }
                 break;
             }
             case 4: {
-                if (Queue<string>* q = queueManager.get_queue<string>(index)) { cout << "Обновленная очередь: "; q->print(); }
+                if (Queue<string>* q = queues.get_queue<string>(index)) { cout << "Обновленная очередь: "; q->print(); }
                 break;
             }
             default:{
@@ -327,7 +327,7 @@ void remove_element_from_queue(Queue_array& queueManager) {
 template<typename Type>
 void menu(){
     int choice = 0;
-    Queue_array queueManager;
+    Queue_array queues;
     
     do{
         system("clear");
@@ -337,22 +337,22 @@ void menu(){
         switch (choice){
         case 1:
             system("clear");
-            create_queue_auto(queueManager);
+            create_queue_auto(queues);
             break;
             
         case 2:
             system("clear");
-            queueManager.print_all();
+            queues.print_all();
             break;
             
         case 3:
             system("clear");
-            add_element_to_queue(queueManager);
+            add_element_to_queue(queues);
             break;
             
         case 4:
             system("clear");
-            remove_element_from_queue(queueManager);
+            remove_element_from_queue(queues);
             break;
 
         case 0:
