@@ -103,17 +103,6 @@ Queue<Type>::Queue(const Queue& other) {
 }
 
 template<typename Type>
-std::vector<Type> Queue<Type>::toVector() const {
-    std::vector<Type> result;
-    Node<Type>* current = start_;
-    while (current != nullptr) {
-        result.push_back(current->data);
-        current = current->next;
-    }
-    return result;
-}
-
-template<typename Type>
 Queue<Type>::Queue(Queue&& other) noexcept 
     : start_(other.start_), end_(other.end_), size_(other.size_) {
     other.start_ = nullptr;

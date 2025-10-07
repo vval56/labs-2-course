@@ -22,7 +22,6 @@ public:
     Type start();
     Type end();
     Type pop();
-    std::vector<Type> toVector() const;
     
 private:
     Node<Type>* start_ = nullptr;

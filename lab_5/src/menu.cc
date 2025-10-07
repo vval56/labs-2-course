@@ -31,7 +31,7 @@ void print_menu(){
          << "0 - Выход\n";
 }
 
-bool isInt(const string &s) {
+bool is_int(const string &s) {
     if (s.empty()) return false;
     size_t i = 0;
     if (s[0] == '-' || s[0] == '+') i++;
@@ -40,7 +40,7 @@ bool isInt(const string &s) {
     return true;
 }
 
-bool isDouble(const string &s) {
+bool is_double(const string &s) {
     bool dot = false;
     if (s.empty()) return false;
     size_t i = 0;
@@ -79,7 +79,7 @@ void create_int_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<int>();
     
     for (auto &val : inputs) {
-        if (!isInt(val)) {
+        if (!is_int(val)) {
             cout << "Ошибка: введён элемент, не являющийся int!\n";
             delete q;
             return;
@@ -94,7 +94,7 @@ void create_double_queue(Queue_array& queues, const vector<string>& inputs) {
     auto q = new Queue<double>();
     
     for (auto &val : inputs) {
-        if (!(isDouble(val) || isInt(val))) {
+        if (!(is_double(val) || is_int(val))) {
             cout << "Ошибка: введён элемент, не являющийся double!\n";
             delete q;
             return;
@@ -133,10 +133,10 @@ void create_string_queue(Queue_array& queues, const vector<string>& inputs) {
 void create_queue_by_type(Queue_array& queues, const vector<string>& inputs) {
     string first = inputs[0];
     
-    if (isInt(first)) {
+    if (is_int(first)) {
         create_int_queue(queues, inputs);
     }
-    else if (isDouble(first)) {
+    else if (is_double(first)) {
         create_double_queue(queues, inputs);
     }
     else if (first.size() == 1) {
