@@ -105,7 +105,7 @@ void choose_figure(Shape *&shape){
 
 void menu(){
     int choice = 0;
-    Shape **Shapes = nullptr; 
+    Shape **shapes = nullptr; 
     int size_shapes = 0;
 
     do {
@@ -117,15 +117,15 @@ void menu(){
         case 1: {
             system("clear");
 
-            Shape* newShape = nullptr;
-            choose_figure(newShape);
-            auto **newArr = new Shape*[size_shapes + 1];
+            Shape* new_shape = nullptr;
+            choose_figure(new_shape);
+            auto **new_arr = new Shape*[size_shapes + 1];
             for (int i = 0; i < size_shapes; i++) {
-                newArr[i] = Shapes[i];
+                new_arr[i] = shapes[i];
             }
-            newArr[size_shapes] = newShape;
-            delete[] Shapes;
-            Shapes = newArr;
+            new_arr[size_shapes] = new_shape;
+            delete[] shapes;
+            shapes = new_arr;
             size_shapes++;
 
             break;
@@ -137,7 +137,7 @@ void menu(){
                 break;
             }
             for(int i = 0; i < size_shapes; i++)
-                cout << "Площадь фигуры '" << Shapes[i]->name() << "' : " << Shapes[i]->square() << "\n";
+                cout << "Площадь фигуры '" << shapes[i]->name() << "' : " << shapes[i]->square() << "\n";
             break;
         
         case 3:
@@ -149,8 +149,8 @@ void menu(){
 
             cout << "Список всех фигур\n";
             for(int i = 0; i < size_shapes; i++){
-                cout << "Фигура " << Shapes[i]->name() << " ";
-                Shapes[i]->parametrs();
+                cout << "Фигура " << shapes[i]->name() << " ";
+                shapes[i]->parametrs();
             }
             break;
         
@@ -171,6 +171,6 @@ void menu(){
     } while(choice != 0);
 
     for(int i = 0; i < size_shapes; i++)
-        delete Shapes[i];
-    delete[] Shapes;
+        delete shapes[i];
+    delete[] shapes;
 }
