@@ -1,6 +1,7 @@
 #include "../include/array.h"
 #include <iostream>
 #include <stdexcept>
+#include <format>
 
 Array::Array() : size_(0), data_(nullptr) {}
 
@@ -36,7 +37,7 @@ Array::~Array() {
 
 int Array::get_element(int index) const {
     if (index < 0 || index >= size_) {
-        throw std::string("Индекс ") + std::to_string(index) + " выходит за границы массива";
+        throw std::format("Индекс {} выходит за границы массива", index);
     }
     return data_[index];
 }
@@ -70,7 +71,7 @@ void Array::add_element(int value) {
 
 void Array::delete_element(int index) {
     if (index < 0 || index >= size_) {
-        throw std::string("Индекс ") + std::to_string(index) + " выходит за границы массива";
+        throw std::format("Индекс {} выходит за границы массива", index);
     }
     
     if (size_ == 1) {

@@ -23,17 +23,19 @@ T check_numbers() {
 
 void hand_input(Array& array) {
     int* temp_arr = nullptr;  
-    int count = 0;            
+    int count = 0;
+    bool incorrect_input = false;           
     
     cout << "Ввод массива" << endl;
     cout << "Вводите числа. Для завершения ввода введите нечисловой символ или пустую строку:\n";
     
-    while (true) {
+    while (!incorrect_input) {
         string input;
         getline(cin, input);
 
         if (input.empty()) {
-            break;
+            incorrect_input = true;
+            continue;
         }
 
         stringstream ss(input);
@@ -48,7 +50,7 @@ void hand_input(Array& array) {
             temp_arr = new_arr;
             count++;
         } else {
-            break; 
+            incorrect_input = true;
         }
     }
 
@@ -71,6 +73,41 @@ void print_menu() {
          << "5 - Удалить элемент по индексу\n"
          << "0 - Выход\n"
          << "Ведите число от 0 до 5: ";
+}
+
+void add_element_array(Array & array){
+    cout << "Введите значение для добавления: ";
+    int value = check_numbers<int>();
+    array.add_element(value);
+    cout << "Элемент добавлен." << endl;
+    array.print();
+}
+
+void show_element_index(Array array){
+    cout << "Введите индекс: ";
+    int index = check_numbers<int>();
+    try {
+        int value = array.get_element(index);
+        cout << "Элемент с индексом " << index << ": " << value << endl;
+    } catch (const std::string& error) {
+        cout << "Ошибка: " << error << endl;
+    }
+}
+
+void delete_element_array(Array & array){
+    cout << "Введите индекс для удаления: ";
+    int index = check_numbers<int>();
+    try {
+        array.delete_element(index);
+        cout << "Элемент удален." << endl;
+        try {
+            array.print();
+        } catch (const std::string& error) {
+            cout << "Ошибка: " << error << endl;
+        }
+    } catch (const std::string& error) {
+        cout << "Ошибка: " << error << endl;
+    }   
 }
 
 void menu() {
@@ -105,15 +142,7 @@ void menu() {
                 cout << "Ошибка: " << error << endl;
                 break;
             }
-            cout << "Введите значение для добавления: ";
-            int value = check_numbers<int>();
-            array.add_element(value);
-            cout << "Элемент добавлен." << endl;
-            try {
-                array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
-            }
+            add_element_array(array);
             break;
         }
             
@@ -125,15 +154,7 @@ void menu() {
                 cout << "Ошибка: " << error << endl;
                 break;
             }
-            cout << "Введите индекс: ";
-            int index = check_numbers<int>();
-            try {
-                int value = array.get_element(index);
-                cout << "Элемент с индексом " << index << ": " << value << endl;
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
-            }
-            
+            show_element_index(array);
             break;
         }
             
@@ -145,19 +166,7 @@ void menu() {
                 cout << "Ошибка: " << error << endl;
                 break;
             }
-            cout << "Введите индекс для удаления: ";
-            int index = check_numbers<int>();
-            try {
-                array.delete_element(index);
-                cout << "Элемент удален." << endl;
-                try {
-                array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
-            }
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
-            }    
+            delete_element_array(array);
             break;
         }
             
