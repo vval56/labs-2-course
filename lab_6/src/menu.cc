@@ -94,19 +94,24 @@ void show_element_index(Array array){
     }
 }
 
-void delete_element_array(Array & array){
+void print_array_safe(const Array& array) {
+    try {
+        array.print();
+    } catch (const std::string& error) {
+        cout << "Ошибка при выводе массива: " << error << endl;
+    }
+}
+
+void delete_element_array(Array& array) {
     cout << "Введите индекс для удаления: ";
     int index = check_numbers<int>();
+    
     try {
         array.delete_element(index);
         cout << "Элемент удален." << endl;
-        try {
-            array.print();
-        } catch (const std::string& error) {
-            cout << "Ошибка: " << error << endl;
-        }
+        print_array_safe(array);
     } catch (const std::string& error) {
-        cout << "Ошибка: " << error << endl;
+        cout << "Ошибка при удалении: " << error << endl;
     }   
 }
 
