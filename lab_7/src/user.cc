@@ -14,7 +14,7 @@ void User::input_in_file(const std::string& file_name, const User& user) const {
     file.close();
 }
 
-void User::enter_user(User & user, const std::string& file_name){
+void User::enter_user(User & user, const std::string& file_name) const {
     std::string temp_line;
     int number = 0;
 
