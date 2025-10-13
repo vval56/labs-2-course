@@ -69,6 +69,7 @@ Makefile
 *.out
 *.bbl
 *.blg
+*.txt
 *.fdb_latexmk
 
 # Игнорируем системные файлы

@@ -2,7 +2,7 @@
 #include "../header/menu.h"
 #include <fstream>
 
-void User::input_in_file(const std::string file_name, const User& user) {
+void User::input_in_file(const std::string& file_name, const User& user) const {
     std::ofstream file(file_name, std::ios::app);
 
     file << "Фамилия: " << user.surname_ << std::endl
@@ -14,7 +14,7 @@ void User::input_in_file(const std::string file_name, const User& user) {
     file.close();
 }
 
-void User::enter_user(User & user, const std::string file_name){
+void User::enter_user(User & user, const std::string& file_name){
     std::string temp_line;
     int number = 0;
 

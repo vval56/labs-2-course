@@ -24,9 +24,7 @@ bool is_only_letters(const std::string& str) {
                 return false;
             }
             
-            auto c2 = static_cast<unsigned char>(str[i + 1]);
-            
-            if (!is_cyrillic_char(c, c2)) {
+            if (auto c2 = static_cast<unsigned char>(str[i + 1]); !is_cyrillic_char(c, c2)) {
                 std::cout << "Недопустимый символ: допускаются только русские буквы\n";
                 return false;
             }
@@ -66,7 +64,7 @@ void print_menu(){
               << "0 - Выход" << std::endl;
 }
 
-void print_file(const std::string file_name){
+void print_file(const std::string& file_name){
     std::ifstream file(file_name);
     std::string line;
 
