@@ -19,7 +19,6 @@ public:
         Iterator& operator++();
         int& operator*();
         bool operator!=(const Iterator & other) const;
-        bool operator==(const Iterator& other) const ;
     };
 
     Iterator begin();

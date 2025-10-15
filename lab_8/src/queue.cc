@@ -50,10 +50,6 @@ bool Queue::Iterator::operator!=(const Iterator& other) const {
     return current_ != other.current_;
 }
 
-bool Queue::Iterator::operator==(const Iterator& other) const {
-    return current_ == other.current_;
-}
-
 Queue::Iterator Queue::begin() {
     return Iterator(start_);
 }
