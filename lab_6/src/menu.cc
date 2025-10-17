@@ -98,7 +98,7 @@ void show_element_index(Array array){
 void print_array_safe(const Array& array) {
     try {
         array.print();
-    } catch (const Array_exception error) {
+    } catch (const Array_exception &error) {
         error;
         cout << "Ошибка при выводе массива: " << error.what() << endl;
     }

@@ -13,15 +13,9 @@ public:
         message_ = "Индекс " + std::to_string(index) + " выходит за границы массива";
     }
     
-    Array_exception() {
-        message_ = "Операция невозможна: массив пуст";
-    }
-    
     const char* what() const noexcept override {
         return message_.c_str();
     }
-    
-    virtual ~Array_exception() = default;
 };
 
 #endif
