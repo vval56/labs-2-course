@@ -1,4 +1,5 @@
 #include "../include/array.h"
+#include "../include/array_exceptions.h"
 #include <iostream>
 #include <stdexcept>
 #include <format>
@@ -37,7 +38,7 @@ Array::~Array() {
 
 int Array::get_element(int index) const {
     if (index < 0 || index >= size_) {
-        throw std::format("Индекс {} выходит за границы массива", index);
+        throw Array_exception(index);
     }
     return data_[index];
 }
@@ -71,7 +72,7 @@ void Array::add_element(int value) {
 
 void Array::delete_element(int index) {
     if (index < 0 || index >= size_) {
-        throw std::format("Индекс {} выходит за границы массива", index);
+        throw Array_exception(index);
     }
     
     if (size_ == 1) {

@@ -1,4 +1,5 @@
 #include "../include/menu.h"
+#include "../include/array_exceptions.h"
 #include <iostream>
 #include <sstream>
 #include <limits>
@@ -89,16 +90,17 @@ void show_element_index(Array array){
     try {
         int value = array.get_element(index);
         cout << "Элемент с индексом " << index << ": " << value << endl;
-    } catch (const std::string& error) {
-        cout << "Ошибка: " << error << endl;
+    } catch (const Array_exception &error) {
+        cout << "Ошибка: " << error.what() << endl;
     }
 }
 
 void print_array_safe(const Array& array) {
     try {
         array.print();
-    } catch (const std::string& error) {
-        cout << "Ошибка при выводе массива: " << error << endl;
+    } catch (const Array_exception error) {
+        error;
+        cout << "Ошибка при выводе массива: " << error.what() << endl;
     }
 }
 
@@ -110,8 +112,8 @@ void delete_element_array(Array& array) {
         array.delete_element(index);
         cout << "Элемент удален." << endl;
         print_array_safe(array);
-    } catch (const std::string& error) {
-        cout << "Ошибка при удалении: " << error << endl;
+    } catch (const Array_exception &error) {
+        cout << "Ошибка при удалении: " << error.what() << endl;
     }   
 }
 
@@ -134,8 +136,8 @@ void menu() {
             system("clear");
             try {
                 array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
+            } catch (const Array_exception &error) {
+                cout << "Ошибка: " << error.what() << endl;
             }
             break;
             
@@ -143,8 +145,8 @@ void menu() {
             system("clear");
             try {
                 array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
+            } catch (const Array_exception &error) {
+                cout << "Ошибка: " << error.what() << endl;
                 break;
             }
             add_element_array(array);
@@ -155,8 +157,8 @@ void menu() {
             system("clear");
             try {
                 array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
+            } catch (const Array_exception &error) {
+                cout << "Ошибка: " << error.what() << endl;
                 break;
             }
             show_element_index(array);
@@ -167,8 +169,8 @@ void menu() {
             system("clear");
             try {
                 array.print();
-            } catch (const std::string& error) {
-                cout << "Ошибка: " << error << endl;
+            } catch (const Array_exception &error) {
+                cout << "Ошибка: " << error.what() << endl;
                 break;
             }
             delete_element_array(array);
