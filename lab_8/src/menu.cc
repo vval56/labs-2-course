@@ -1,11 +1,4 @@
-#include "../headers/queue.h"
-#include "../headers/algorithm.h"
 #include "../headers/menu.h"
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <iostream>
-#include <cctype>
 
 template<typename T>
 T check_numbers() {
@@ -30,9 +23,12 @@ void print_menu(){
               << "0 - Выход" << std::endl;
 }
 
-void enter_queue(Queue& queue){
-    std::cout << "Введите целые числа. Для завершения ввода введите пустую строку\n";
+template<typename T>
+void enter_queue(Queue<T>& queue){
+    std::cout << "Введите числа. Для завершения ввода введите пустую строку\n";
 
+    queue.clear();
+    
     while (true) {
         std::string input;
         std::getline(std::cin, input);
@@ -41,7 +37,7 @@ void enter_queue(Queue& queue){
             break;
         }
         std::stringstream ss(input);
-        int number;
+        T number;
         if (ss >> number && ss.eof()) {
             queue.push(number);
         } else {
@@ -50,22 +46,26 @@ void enter_queue(Queue& queue){
     }
 }
 
-void print_queue(Queue& queue) {
+template<typename T>
+void print_queue(Queue<T>& queue) {
     std::cout << "Ваша очередь:\n";
     bool first = true;
-    for (const auto& value : queue) {
+    auto it = queue.begin();
+    while (it != queue.end()) {
         if (!first) std::cout << ", ";
-        std::cout << value;
+        std::cout << *it;
         first = false;
+        ++it;
     }
     std::cout << std::endl;
 }
 
+template<typename T>
 void menu(){
-    Queue queue;
+    Queue<T> queue;
     int choice = 0;
-    int value;
-    
+    T value; 
+
     do{
         system("clear");
         print_menu();
@@ -85,13 +85,13 @@ void menu(){
                 break;
             }
 
-            std::cout << "Введите число для поиска: ";
-            value = check_numbers<int>();
+            std::cout << "Введите значение для поиска: ";
+            value = check_numbers<T>();
 
-            if (auto it = Algorithm::find(queue.begin(), queue.end(), value); it != queue.end()) {
-                std::cout << "Найдено число: " << *it << "\n";
+            if (auto it = Algorithm<T>::find(queue.begin(), queue.end(), value); it != queue.end()) {
+                std::cout << "Найдено: " << *it << "\n";
             } else {
-                std::cout << "Число не найдено.\n";
+                std::cout << "Значение не найдено.\n";
             }
             break;
         }
@@ -103,7 +103,7 @@ void menu(){
             }
             print_queue(queue);
             std::cout << "Отсортированная очередь:\n";
-            Algorithm::sort(queue);
+            Algorithm<T>::sort(queue);
             print_queue(queue);
             break;
         case 4:
@@ -126,3 +126,17 @@ void menu(){
         }
     }while(choice != 0);
 }
+
+template int check_numbers<int>();
+template double check_numbers<double>();
+template char check_numbers<char>();
+
+template void enter_queue<int>(Queue<int>& queue);
+template void enter_queue<double>(Queue<double>& queue);
+template void enter_queue<char>(Queue<char>& queue);
+
+template void print_queue<int>(Queue<int>& queue);
+template void print_queue<double>(Queue<double>& queue);
+template void print_queue<char>(Queue<char>& queue);
+
+template void menu<int>();

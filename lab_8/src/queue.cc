@@ -1,12 +1,14 @@
 #include "../headers/queue.h"
 #include <iostream>
 
-bool Queue::empty() const {
+template<typename T>
+bool Queue<T>::empty() const {
     return start_ == nullptr;
 }
 
-void Queue::push(const int value) {
-    auto new_node = new Node(value);
+template<typename T>
+void Queue<T>::push(const T value) {
+    auto new_node = new Node<T>(value);
 
     if (empty()) {
         start_ = end_ = new_node;
@@ -16,44 +18,73 @@ void Queue::push(const int value) {
     }
 }
 
-void Queue::pop() {
+template<typename T>
+void Queue<T>::clear() {
+
+    Node<T>* current = start_;
+    int count = 0;
+    while (current != nullptr) {
+        Node<T>* next = current->next_;
+        delete current;
+        current = next;
+        count++;
+    }
+    start_ = end_ = nullptr;
+}
+
+template<typename T>
+void Queue<T>::pop() {
     if (empty()) {
         throw std::string("Очередь пуста\n");
     }
 
-    Node* temp = start_;
+    Node<T>* temp = start_;
     start_ = start_->next_;
-    delete temp;
-
-    if (start_ == nullptr)
+    
+    if (start_ != nullptr) {
+        start_->prev_ = nullptr;
+    } else {
         end_ = nullptr;
+    }
+    
+    delete temp;
 }
 
-int Queue::front() const {
+template<typename T>
+T Queue<T>::front() const {
     if (empty()) {
         throw std::string("Очередь пуста\n");
     }
     return start_->data_;
 }
 
-Queue::Iterator& Queue::Iterator::operator++() {
+template<typename T>
+typename Queue<T>::Iterator& Queue<T>::Iterator::operator++() {
     if (current_) current_ = current_->next_;
     return *this;
 }
 
-int& Queue::Iterator::operator*() {
+template<typename T>
+T& Queue<T>::Iterator::operator*() {
     if (!current_) throw std::string("Dereferencing end iterator");
     return current_->data_;
 }
 
-bool Queue::Iterator::operator!=(const Iterator& other) const {
+template<typename T>
+bool Queue<T>::Iterator::operator!=(const Iterator& other) const {
     return current_ != other.current_;
 }
 
-Queue::Iterator Queue::begin() {
+template<typename T>
+typename Queue<T>::Iterator Queue<T>::begin() {
     return Iterator(start_);
 }
 
-Queue::Iterator Queue::end() {
+template<typename T>
+typename Queue<T>::Iterator Queue<T>::end() {
     return Iterator(nullptr);
 }
+
+template class Queue<int>;
+template class Queue<double>;
+template class Queue<char>;
