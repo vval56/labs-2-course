@@ -67,7 +67,7 @@ void User::process_data_line(const std::string& line, size_t pos, std::string& s
     
     if (key.find("Фамилия") != std::string::npos) {
         surname = value;
-    } else if (key.find("Имя") != std::string::npos) {
+    } else if (key.find("Имя") != std::string::npos) { 
         name = value;
     } else if (key.find("Отчество") != std::string::npos) {
         middle_name = value;
