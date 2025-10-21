@@ -58,9 +58,9 @@ void User::display() const {
               << ",\nНомер: " << number_worker_ << std::endl;
 }
 
-void User::process_data_line(const std::string& line, size_t pos, std::string& surname, std::string& name, std::string& middle_name, int& number) {
-    std::string key = line.substr(0, pos);
-    std::string value = line.substr(pos + 2);
+void User::process_data_line(const std::string_view& line, size_t pos, std::string& surname, std::string& name, std::string& middle_name, int& number) {
+    std::string_view key = line.substr(0, pos);
+    std::string value(line.substr(pos + 2));
     
     value.erase(0, value.find_first_not_of(" \t"));
     value.erase(value.find_last_not_of(" \t") + 1);
@@ -74,10 +74,10 @@ void User::process_data_line(const std::string& line, size_t pos, std::string& s
     } else if (key.find("Номер") != std::string::npos && !value.empty()) {
         try {
             number = std::stoi(value);
-        } catch (const std::invalid_argument& e) {
+        } catch (const std::invalid_argument&) {
             std::cout << "Ошибка: неверный формат числа '" << value << "'" << std::endl;
             number = 0;
-        } catch (const std::out_of_range& e) {
+        } catch (const std::out_of_range&) {
             std::cout << "Ошибка: число слишком большое '" << value << "'" << std::endl;
             number = 0;
         }
@@ -104,10 +104,12 @@ User** User::load_users_from_file(const std::string& file_name, int& user_count)
         return nullptr;
     }
 
-    User** users = new User*[user_count]();
+    auto users = new User*[user_count]();
     file.open(file_name);
     
-    std::string surname, name, middle_name;
+    std::string surname;
+    std::string name;
+    std::string middle_name;
     int number = 0;
     int current_user = 0;
 

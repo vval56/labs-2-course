@@ -26,10 +26,10 @@ public:
     Iterator begin();
     Iterator end();
 
-    Queue() : start_(nullptr), end_(nullptr) {}
+    Queue() = default;
     ~Queue() { clear(); }
 
-    Queue(const Queue<t>& other) : start_(nullptr), end_(nullptr) {
+    Queue(const Queue<t>& other) {
         Node<t>* current = other.start_;
         while (current) {
             push(current->data_);

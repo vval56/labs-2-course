@@ -25,7 +25,7 @@ private:
     std::string middle_name_;
     int number_worker_;
     static void reset_user_data(std::string& surname, std::string& name, std::string& middle_name, int& number);
-    static void process_data_line(const std::string& line, size_t pos, std::string& surname, std::string& name, std::string& middle_name, int& number);
+    static void process_data_line(const std::string_view& line, size_t pos, std::string& surname, std::string& name, std::string& middle_name, int& number);
 };
 
 #endif
