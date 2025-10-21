@@ -64,15 +64,20 @@ void print_menu(){
               << "0 - Выход" << std::endl;
 }
 
-void print_file(const std::string& file_name){
-    std::ifstream file(file_name);
-    std::string line;
-
-    while(std::getline(file, line)){
-        std::cout << line << std::endl;
+void print_file(const std::string& file_name) {
+    int user_count = 0;
+    User** users = User::load_users_from_file(file_name, user_count);
+    
+    if (users == nullptr || user_count == 0) {
+        std::cout << "Файл пуст или пользователи не найдены." << std::endl;
+        return;
     }
     
-    file.close();
+    for (int i = 0; i < user_count; i++) {
+        std::cout << i + 1 << ". ";
+        users[i]->display();
+    }
+    
 }
 
 void menu(){
